@@ -1,24 +1,52 @@
 import logo from './logo.svg';
 import './App.css';
+import TodoList from './TodoList'
+import { useState, useEffect } from 'react';
 
 function App() {
+  //TODOLIST
+  //TODO
+  const [todoListArray, setTodoListArray] = useState([])
+  const [inputValue, setinputValue] = useState("")
+  const makeTodoYes = (todo) => {
+    setTodoListArray(todoListArray.map(el => {
+      if (el === todo) {
+        el.result = true
+      } 
+      return el
+    }))
+  }
+
+  const makeTodoNo = (todo) => {
+    setTodoListArray(todoListArray.map(el => {
+      if (el === todo) {
+        el.result = false
+      } 
+      return el
+    }))
+  }
+
+  const deleteTodo = (todo) => {
+    setTodoListArray(todoListArray.filter(el => el !== todo))
+  }
+  useEffect(() => {
+   console.log(todoListArray)
+  }, [todoListArray])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <input className={""} onChange={(e)=> {
+      setinputValue(e.target.value)
+      }} value={inputValue}></input>
+    <button onClick ={() => {
+      setTodoListArray([...todoListArray,{value: inputValue, result: ""}]) 
+      setinputValue('')
+    }}>ADD TODO</button>
+    <TodoList leshaTodoList={todoListArray} forTest ="newPropforProps" makeTodoYes={makeTodoYes}
+     makeTodoNo={makeTodoNo}  deleteTodo={deleteTodo}>
+    I am inside the tag
+    </TodoList>
+    </>
   );
 }
 
