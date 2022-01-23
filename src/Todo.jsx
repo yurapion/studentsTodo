@@ -3,8 +3,7 @@ import './App.css';
 
 export default function Todo(props) {
     return (
-        <div style={{ width: "400px", border: "1px solid black", margin: "10px 0"}} 
-        // className={props.todo.result ? "todoYes" : "todoNo"
+        <div style={{ width: "400px", border: "1px solid black", margin: "10px 0"}}
         className={props.todo.result !== "" ? props.todo.result ? "todoYes" : "todoNo" : ""}>
             <p style={{
                 display: "inline-block",        
